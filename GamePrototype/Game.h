@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseGame.h"
+#include "Transform.h"
 class Game : public BaseGame
 {
 public:
@@ -27,4 +28,10 @@ private:
 	void Initialize();
 	void Cleanup( );
 	void ClearBackground( ) const;
+
+	float m_Radius{ 10.f };
+	Transform m_PlayerTransform{};
+	Transform m_MazeTransform{};
+	Transform m_WallTransform{};
+	Vector2f m_Velocity{};
 };
