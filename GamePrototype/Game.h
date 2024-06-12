@@ -1,6 +1,13 @@
 #pragma once
 #include "BaseGame.h"
 #include "Transform.h"
+#include <stack>
+#include <vector>
+#include "SoundEffect.h"
+#include "SoundStream.h"
+#include <Texture.h>
+#include <SDL_image.h>
+
 class Game : public BaseGame
 {
 public:
@@ -28,10 +35,33 @@ private:
 	void Initialize();
 	void Cleanup( );
 	void ClearBackground( ) const;
+	void DrawLevel1() const;
+	void DrawLevel2() const;
+	void DrawPlayer() const;
+	void CheckCollisionLevel1();
+	void CheckCollisionLevel2();
+	void SetGameMode();
 
-	float m_Radius{ 10.f };
+	float m_SizePlayer;
+	bool m_Level1Completed;
+	bool m_Level2Completed;
+	bool m_Level3Completed;
+	bool m_Minijumpscare;
+	bool m_Minijumpscare2;
+	bool m_Escaped;
+	float m_Velocity;
+	bool m_IsGameModeChanged;
+
 	Transform m_PlayerTransform{};
-	Transform m_MazeTransform{};
-	Transform m_WallTransform{};
-	Vector2f m_Velocity{};
+	Transform m_LevelTransform{};
+	SoundStream* m_pMusic1;
+	SoundStream* m_pMusic2;
+	SoundStream* m_pMusic3;
+	SoundEffect* m_pLaugh;
+	SoundEffect* m_pJumpScare;
+	Texture* m_pMinijumpscare;
+	Texture* m_pMinijumpscare2;
+	Texture* m_pEscaped;
+	Texture* m_pChangeMode;
+	
 };
