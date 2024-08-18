@@ -6,7 +6,8 @@
 #include "SoundEffect.h"
 #include "SoundStream.h"
 #include <Texture.h>
-#include <SDL_image.h>
+#include <utils.h>
+
 
 class Game : public BaseGame
 {
@@ -20,7 +21,7 @@ public:
 	~Game();
 
 	void Update( float elapsedSec ) override;
-	void Draw( ) const override;
+	void Draw() const override;
 
 	// Event handling
 	void ProcessKeyDownEvent( const SDL_KeyboardEvent& e ) override;
@@ -35,48 +36,25 @@ private:
 	void Initialize();
 	void Cleanup( );
 	void ClearBackground( ) const;
-	void DrawLevel1() const;
-	void DrawLevel2() const;
-	void DrawLevel3() const;
+
+	//Player
 	void DrawPlayer() const;
-	void DrawEnemy() const;
-	void CheckCollisionLevel1();
-	void CheckCollisionLevel2();
-	void CheckCollisionLevel3();
-	void SetGameMode();
-
+	Circlef m_PlayerTransform{};
 	float m_SizePlayer;
-	bool m_Level1Completed;
-	bool m_Level2Completed;
-	bool m_Level3Completed;
-	bool m_Minijumpscare;
-	bool m_Minijumpscare2;
-	bool m_NewLevel;
-	bool m_Escaped;
-	bool m_BlueScreen;
-	bool m_NoSignal;
-	float m_Velocity;
-	bool m_IsGameModeChanged;
-	float m_Level3EndGlitch;
-
-	Transform m_PlayerTransform{};
-	Transform m_EnemyTransform{};
-	Transform m_LevelTransform{};
-
-	SoundStream* m_pMusic[4];
-
-	SoundEffect* m_pLaughSound;
-	SoundEffect* m_pJumpScareSound;
-	SoundEffect* m_pBlueScreenSound[2];
-	SoundEffect* m_pNoSignalSound;
-	SoundEffect* m_pGlitchSound;
-
-	Texture* m_pCam;
-	Texture* m_pMinijumpscare[2];
-	Texture* m_pBlueScreen;
-	Texture* m_pNoSignal;
-	Texture* m_pEscaped;
-	Texture* m_pChangeMode;
-	Texture* m_pGlitch[3];
+	Vector2f m_Velocity;
+	Vector2f m_Pos;
 	
+	//Points
+	void DrawPoints() const;
+	Circlef m_PointsTransform{};
+	float m_SizePoints;
+	int m_Score;
+	int m_HighScore;
+	float m_Timer;
+	SoundEffect* m_pSoundEffects[2];
+	
+	//Text
+	void DrawTxt() const;
 };
+	
+
